@@ -1,0 +1,98 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow: hidden; }
+#app { display: flex; height: 100vh; }
+#sidebar { width: 280px; background: #f5f5f5; border-right: 1px solid #ddd; display: flex; flex-direction: column; }
+#sidebar-header { padding: 12px; border-bottom: 1px solid #ddd; display: flex; gap: 8px; flex-wrap: wrap; }
+#sidebar-header button { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; }
+#sidebar-header button:hover { opacity: 0.8; }
+.btn-primary { background: #4a90d9; color: white; }
+.btn-secondary { background: #6c757d; color: white; }
+.btn-success { background: #28a745; color: white; }
+.btn-danger { background: #dc3545; color: white; }
+#tree-container { flex: 1; overflow-y: auto; padding: 8px; }
+.tree-node { margin-left: 16px; }
+.tree-item { display: flex; align-items: center; padding: 4px 8px; border-radius: 4px; cursor: pointer; margin: 2px 0; }
+.tree-item:hover { background: #e0e0e0; }
+.tree-item.selected { background: #4a90d9; color: white; }
+.tree-item.root { font-weight: bold; margin-left: -16px; }
+.node-label { flex: 1; font-size: 13px; }
+.node-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+#canvas-container { flex: 1; position: relative; background: #fafafa; }
+#canvas { width: 100%; height: 100%; }
+#node-editor { position: absolute; top: 10px; right: 10px; background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 240px; display: none; }
+#node-editor.active { display: block; }
+#node-editor label { display: block; margin-bottom: 4px; font-size: 12px; color: #666; }
+#node-editor input, #node-editor select { width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 4px; }
+.color-picker { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.color-option { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
+.color-option:hover, .color-option.selected { border-color: #333; }
+#zoom-controls { position: absolute; bottom: 20px; right: 20px; display: flex; gap: 8px; }
+#zoom-controls button { width: 36px; height: 36px; border: none; border-radius: 50%; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.15); cursor: pointer; font-size: 18px; }
+#context-menu { position: absolute; background: white; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.2); padding: 4px 0; min-width: 160px; display: none; z-index: 1000; }
+#context-menu.active { display: block; }
+.context-menu-item { padding: 8px 16px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.context-menu-item:hover { background: #f0f0f0; }
+.context-menu-item.danger { color: #dc3545; }
+.context-menu-item.disabled { color: #aaa; pointer-events: none; }
+.context-menu-divider { height: 1px; background: #eee; margin: 4px 0; }
+
+/* 日本語入力用フローティング入力欄 */
+#inline-editor {
+  position: absolute;
+  display: none;
+  z-index: 100;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+#inline-editor.active {
+  display: block;
+}
+#inline-editor input {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 2px solid #4a90d9;
+  border-radius: 20px;
+  outline: none;
+  min-width: 200px;
+  box-shadow: 0 2px 8px rgba(74, 144, 217, 0.2);
+  background: white;
+}
+#inline-editor input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.3);
+}
+
+#inline-editor .editor-hint {
+  font-size: 11px;
+  color: #666;
+  margin-top: 6px;
+  padding-left: 4px;
+}
+
+/* 入力モード表示 */
+#input-mode-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+#input-mode-indicator.active {
+  opacity: 1;
+}
+#input-mode-indicator .mode-icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4a90d9;
+}

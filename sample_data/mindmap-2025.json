@@ -1,0 +1,236 @@
+{
+  "id": 1,
+  "label": "2025年のマインドマップ",
+  "color": "#2196f3",
+  "children": [
+    {
+      "id": 2,
+      "label": "キャリア",
+      "color": "#ff5722",
+      "children": [
+        {
+          "id": 3,
+          "label": "スキル",
+          "color": "#ff5722",
+          "children": [
+            {
+              "id": 4,
+              "label": "プログラミング",
+              "color": "#ff5722",
+              "children": [
+                { "id": 5, "label": "TypeScript: 毎日30分Udemyコースを進める", "color": "#ff5722", "children": [] },
+                { "id": 6, "label": "Rust: 「The Rust Book」を3月末までに読了", "color": "#ff5722", "children": [] },
+                { "id": 7, "label": "AI/ML: Courseraの機械学習コースを6月までに修了", "color": "#ff5722", "children": [] }
+              ]
+            },
+            {
+              "id": 8,
+              "label": "クラウド",
+              "color": "#ff5722",
+              "children": [
+                { "id": 9, "label": "AWS SAP: 4月に試験予約、毎週土曜3時間勉強", "color": "#ff5722", "children": [] },
+                { "id": 10, "label": "CKA: 8月受験目標、Killer.shで模擬試験3回", "color": "#ff5722", "children": [] }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "label": "サイドプロジェクト",
+          "color": "#ff5722",
+          "children": [
+            { "id": 12, "label": "SaaS: 1月企画、2-4月開発、5月βリリース", "color": "#ff5722", "children": [] },
+            { "id": 13, "label": "OSS: 毎月第1・第3土曜にPR作成", "color": "#ff5722", "children": [] },
+            { "id": 14, "label": "ブログ: 毎週日曜夜に1記事下書き完成", "color": "#ff5722", "children": [] }
+          ]
+        },
+        {
+          "id": 15,
+          "label": "ネットワーキング",
+          "color": "#ff5722",
+          "children": [
+            { "id": 16, "label": "3月DevFest、7月AWS Summit、11月技術書典に参加申込", "color": "#ff5722", "children": [] },
+            { "id": 17, "label": "9月の社内LTで15分発表（テーマ: 個人開発の学び）", "color": "#ff5722", "children": [] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "label": "お金",
+      "color": "#4caf50",
+      "children": [
+        {
+          "id": 19,
+          "label": "貯金",
+          "color": "#4caf50",
+          "children": [
+            { "id": 20, "label": "生活費×6ヶ月=180万円を12月までに確保", "color": "#4caf50", "children": [] },
+            { "id": 21, "label": "給料日に自動振替で20%を貯蓄口座へ", "color": "#4caf50", "children": [] }
+          ]
+        },
+        {
+          "id": 22,
+          "label": "投資",
+          "color": "#4caf50",
+          "children": [
+            {
+              "id": 23,
+              "label": "インデックスファンド",
+              "color": "#4caf50",
+              "children": [
+                { "id": 24, "label": "楽天証券で毎月1日にeMAXIS Slim S&P500を5万円積立設定", "color": "#4caf50", "children": [] },
+                { "id": 25, "label": "同日にeMAXIS Slim全世界株式を3万円積立設定", "color": "#4caf50", "children": [] }
+              ]
+            },
+            { "id": 26, "label": "新NISA: 成長投資枠240万円を年初一括投資", "color": "#4caf50", "children": [] },
+            { "id": 27, "label": "iDeCo: 毎月23,000円の掛金を継続確認", "color": "#4caf50", "children": [] }
+          ]
+        },
+        { "id": 28, "label": "2月に保険の窓口で現契約を見直し相談予約", "color": "#4caf50", "children": [] }
+      ]
+    },
+    {
+      "id": 29,
+      "label": "健康",
+      "color": "#e91e63",
+      "children": [
+        {
+          "id": 30,
+          "label": "運動",
+          "color": "#e91e63",
+          "children": [
+            { "id": 31, "label": "月・水・金の朝7時にエニタイムで筋トレ1時間", "color": "#e91e63", "children": [] },
+            { "id": 32, "label": "毎週土曜朝に5kmランニング、Stravaで記録", "color": "#e91e63", "children": [] },
+            { "id": 33, "label": "10月の横浜マラソン（ハーフ）にエントリー", "color": "#e91e63", "children": [] }
+          ]
+        },
+        {
+          "id": 34,
+          "label": "身体",
+          "color": "#e91e63",
+          "children": [
+            { "id": 35, "label": "毎朝体重計に乗りアプリに記録、月末に推移確認", "color": "#e91e63", "children": [] },
+            { "id": 36, "label": "3ヶ月ごとにジムのInBodyで体脂肪率測定", "color": "#e91e63", "children": [] },
+            { "id": 37, "label": "6月に会社の健康診断、要再検査項目は即予約", "color": "#e91e63", "children": [] }
+          ]
+        },
+        {
+          "id": 38,
+          "label": "メンタル",
+          "color": "#e91e63",
+          "children": [
+            { "id": 39, "label": "毎朝起床後Headspaceで10分瞑想", "color": "#e91e63", "children": [] },
+            { "id": 40, "label": "23時にスマホをリビングに置き、23:30就寝", "color": "#e91e63", "children": [] },
+            { "id": 41, "label": "日曜9-18時はスマホを機内モードに設定", "color": "#e91e63", "children": [] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "label": "旅行",
+      "color": "#9c27b0",
+      "children": [
+        {
+          "id": 43,
+          "label": "国内",
+          "color": "#9c27b0",
+          "children": [
+            { "id": 44, "label": "8月第2週に北海道3泊4日、6月に航空券予約", "color": "#9c27b0", "children": [] },
+            { "id": 45, "label": "1月末に沖縄2泊3日、12月中に宿予約完了", "color": "#9c27b0", "children": [] },
+            { "id": 46, "label": "11月下旬に京都1泊2日、嵐山・東福寺の紅葉巡り", "color": "#9c27b0", "children": [] }
+          ]
+        },
+        {
+          "id": 47,
+          "label": "海外",
+          "color": "#9c27b0",
+          "children": [
+            { "id": 48, "label": "GWに台湾2泊3日、鼎泰豊・夜市・九份を巡る", "color": "#9c27b0", "children": [] },
+            { "id": 49, "label": "9月にダナン4泊5日、ビーチリゾートでリフレッシュ", "color": "#9c27b0", "children": [] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "label": "学習",
+      "color": "#00bcd4",
+      "children": [
+        {
+          "id": 51,
+          "label": "読書",
+          "color": "#00bcd4",
+          "children": [
+            { "id": 52, "label": "通勤電車で毎日30分読書、Notionに要約メモ", "color": "#00bcd4", "children": [] },
+            { "id": 53, "label": "技術書: 1-2月Go、3-4月設計、5-6月インフラ", "color": "#00bcd4", "children": [] },
+            { "id": 54, "label": "ビジネス書: 7-8月マネジメント、9-10月戦略、11-12月思考法", "color": "#00bcd4", "children": [] }
+          ]
+        },
+        {
+          "id": 55,
+          "label": "語学",
+          "color": "#00bcd4",
+          "children": [
+            { "id": 56, "label": "11月TOEIC受験、金フレを毎日50単語復習", "color": "#00bcd4", "children": [] },
+            { "id": 57, "label": "Camblyで週2回×1時間のレッスン予約", "color": "#00bcd4", "children": [] }
+          ]
+        },
+        { "id": 58, "label": "Udemy: React、Docker、Terraformの3コースを各2ヶ月で完了", "color": "#00bcd4", "children": [] }
+      ]
+    },
+    {
+      "id": 59,
+      "label": "人間関係",
+      "color": "#795548",
+      "children": [
+        {
+          "id": 60,
+          "label": "家族",
+          "color": "#795548",
+          "children": [
+            { "id": 61, "label": "3月・5月・8月・12月の連休に実家へ帰省", "color": "#795548", "children": [] },
+            { "id": 62, "label": "8月に家族で温泉旅行、4月に宿予約", "color": "#795548", "children": [] }
+          ]
+        },
+        {
+          "id": 63,
+          "label": "友人",
+          "color": "#795548",
+          "children": [
+            { "id": 64, "label": "毎月最終金曜に大学の友人3人と飲み会", "color": "#795548", "children": [] },
+            { "id": 65, "label": "1月中に疎遠な友人5人にLINEで近況報告", "color": "#795548", "children": [] }
+          ]
+        },
+        { "id": 66, "label": "2月にconnpassでReact勉強会を探して参加申込", "color": "#795548", "children": [] }
+      ]
+    },
+    {
+      "id": 67,
+      "label": "ライフスタイル",
+      "color": "#607d8b",
+      "children": [
+        {
+          "id": 68,
+          "label": "住まい",
+          "color": "#607d8b",
+          "children": [
+            { "id": 69, "label": "1月中にクローゼット整理、メルカリで不用品20点出品", "color": "#607d8b", "children": [] },
+            { "id": 70, "label": "3月にFlexiSpot昇降デスクと4Kモニター購入", "color": "#607d8b", "children": [] }
+          ]
+        },
+        {
+          "id": 71,
+          "label": "趣味",
+          "color": "#607d8b",
+          "children": [
+            { "id": 72, "label": "4月にSONY α7C IIを購入、週末に撮影散歩", "color": "#607d8b", "children": [] },
+            { "id": 73, "label": "水・土曜の夕食はクラシルで新レシピに挑戦", "color": "#607d8b", "children": [] },
+            { "id": 74, "label": "毎週金曜夜2時間ゲーム、年内に積みゲー5本クリア", "color": "#607d8b", "children": [] }
+          ]
+        }
+      ]
+    }
+  ]
+}

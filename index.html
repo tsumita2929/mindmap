@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <title>Mindmap Editor</title>
+</head>
+<body>
+  <div id="app">
+    <div id="sidebar">
+      <div id="sidebar-header">
+        <button class="btn-primary" onclick="addChild()">+ 子追加</button>
+        <button class="btn-secondary" onclick="addSibling()">+ 兄弟追加</button>
+        <button class="btn-danger" onclick="deleteNode()">削除</button>
+        <button class="btn-success" onclick="exportData()">エクスポート</button>
+        <button class="btn-secondary" onclick="importData()">インポート</button>
+      </div>
+      <div id="tree-container"></div>
+    </div>
+    <div id="canvas-container">
+      <canvas id="canvas"></canvas>
+      <div id="node-editor">
+        <label>ノード名</label>
+        <input type="text" id="edit-label" onchange="updateNodeLabel(this.value)" onkeydown="if(event.key==='Enter')this.blur()">
+        <label>色</label>
+        <div class="color-picker" id="color-picker"></div>
+      </div>
+      <div id="zoom-controls">
+        <button onclick="zoomIn()">+</button>
+        <button onclick="zoomOut()">−</button>
+        <button onclick="resetView()">⌂</button>
+      </div>
+      <div id="context-menu">
+        <div class="context-menu-item" onclick="contextAddChild()">📁 子ノードを追加</div>
+        <div class="context-menu-item" id="ctx-add-sibling" onclick="contextAddSibling()">📄 兄弟ノードを追加</div>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item" onclick="contextEditNode()">✏️ 名前を編集</div>
+        <div class="context-menu-item" onclick="contextDuplicateNode()">📋 複製</div>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item danger" id="ctx-delete" onclick="contextDeleteNode()">🗑️ 削除</div>
+      </div>
+      
+      <!-- 日本語入力用フローティング入力欄 -->
+      <div id="inline-editor">
+        <input type="text" id="inline-input" placeholder="ノード名を入力...">
+        <div class="editor-hint">Enter で確定 / Esc でキャンセル</div>
+      </div>
+      
+      <!-- 入力モード表示 -->
+      <div id="input-mode-indicator">
+        <div class="mode-icon"></div>
+        <span id="mode-text">編集中</span>
+      </div>
+    </div>
+  </div>
+  <input type="file" id="file-input" accept=".json" style="display:none" onchange="handleFileImport(event)">
+  <script src="app.js"></script>
+</body>
+</html>
