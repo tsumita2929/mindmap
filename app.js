@@ -53,6 +53,28 @@ function updateEditor() {
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
+function isMobileDevice() {
+  // タッチサポートチェック
+  const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  // ユーザーエージェントチェック（in-app browser含む）
+  const ua = navigator.userAgent.toLowerCase();
+  const isMobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile|tablet/i.test(ua);
+  // 画面幅チェック
+  const isNarrowScreen = window.innerWidth <= 768;
+  // in-app browserの判定（LINE, Twitter, Facebook, Instagram等）
+  const isInAppBrowser = /line|fbav|fban|twitter|instagram/i.test(ua);
+
+  return hasTouch || isMobileUA || isNarrowScreen || isInAppBrowser;
+}
+
+function setupMobileMode() {
+  if (isMobileDevice()) {
+    document.body.classList.add('mobile-mode');
+  } else {
+    document.body.classList.remove('mobile-mode');
+  }
+}
+
 function init() {
   const saved = localStorage.getItem('mindmap-data');
   if (saved) {
@@ -62,12 +84,16 @@ function init() {
       nextId = parsed.nextId || 2;
     } catch(e) {}
   }
+  setupMobileMode(); // モバイルモードの設定
   setupColorPicker();
   setupCanvasEvents();
   resize();
   render();
   updateMobileActionBar(); // モバイルアクションバーの初期状態を設定
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', () => {
+    setupMobileMode();
+    resize();
+  });
 }
 
 function escapeHtml(str) {

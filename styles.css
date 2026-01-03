@@ -238,26 +238,41 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; o
 #mobile-action-bar {
   display: none;
   position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   background: white;
   padding: 12px 8px;
+  padding-bottom: 12px;
   padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
   box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
-  z-index: 50;
+  z-index: 1000;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: distribute;
   justify-content: space-around;
   gap: 8px;
 }
 
 #mobile-action-bar.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 .action-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   border: none;
   background: #f5f5f5;
@@ -265,6 +280,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; o
   padding: 10px 16px;
   min-width: 70px;
   cursor: pointer;
+  -webkit-transition: all 0.2s;
   transition: all 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
@@ -307,9 +323,38 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; o
 /* モバイル表示時のみアクションバーを表示 */
 @media (max-width: 768px) {
   #mobile-action-bar {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
   }
+}
 
+/* モバイルモード時の調整（JSで.mobile-modeクラスを付与） */
+body.mobile-mode #mobile-action-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body.mobile-mode #zoom-controls,
+#mobile-action-bar:not([style*="display: none"]) ~ #zoom-controls {
+  bottom: 90px;
+}
+
+body.mobile-mode #input-mode-indicator {
+  bottom: 90px;
+}
+
+body.mobile-mode #node-editor {
+  bottom: 100px;
+}
+
+body.mobile-mode #inline-editor {
+  bottom: 100px !important;
+  top: auto !important;
+}
+
+@media (max-width: 768px) {
   /* アクションバーがある場合のズームコントロール位置調整 */
   #zoom-controls {
     bottom: 90px;
