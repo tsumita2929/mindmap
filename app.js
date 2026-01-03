@@ -66,6 +66,7 @@ function init() {
   setupCanvasEvents();
   resize();
   render();
+  updateMobileActionBar(); // モバイルアクションバーの初期状態を設定
   window.addEventListener('resize', resize);
 }
 
@@ -112,7 +113,13 @@ function setupCanvasEvents() {
   canvas.addEventListener('mouseup', () => isDragging = false);
   canvas.addEventListener('mouseleave', () => isDragging = false);
 
-  // タッチイベント対応
+  // タッチイベント対応（長押し・ダブルタップ対応）
+  let longPressTimer = null;
+  let lastTapTime = 0;
+  let lastTapNode = null;
+  const LONG_PRESS_DURATION = 500; // 長押し判定時間（ms）
+  const DOUBLE_TAP_DELAY = 300; // ダブルタップ判定時間（ms）
+
   canvas.addEventListener('touchstart', e => {
     if (e.touches.length === 1) {
       isDragging = true;
@@ -120,6 +127,24 @@ function setupCanvasEvents() {
       const touch = e.touches[0];
       dragStartX = touch.clientX - offsetX;
       dragStartY = touch.clientY - offsetY;
+
+      // 長押し検出のためのタイマーを設定
+      const touchX = touch.clientX;
+      const touchY = touch.clientY;
+      longPressTimer = setTimeout(() => {
+        if (!dragMoved) {
+          const rect = canvas.getBoundingClientRect();
+          const x = (touchX - rect.left - offsetX - canvas.width/2) / scale;
+          const y = (touchY - rect.top - offsetY - canvas.height/2) / scale;
+          const node = findNodeAtPosition(data, x, y);
+          if (node) {
+            // バイブレーションフィードバック（対応端末のみ）
+            if (navigator.vibrate) navigator.vibrate(50);
+            selectNode(node.id);
+            showContextMenu(touchX, touchY, node);
+          }
+        }
+      }, LONG_PRESS_DURATION);
     }
   }, { passive: true });
 
@@ -130,6 +155,11 @@ function setupCanvasEvents() {
       const dy = touch.clientY - offsetY - dragStartY;
       if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
         dragMoved = true;
+        // ドラッグ開始したら長押しタイマーをキャンセル
+        if (longPressTimer) {
+          clearTimeout(longPressTimer);
+          longPressTimer = null;
+        }
       }
       offsetX = touch.clientX - dragStartX;
       offsetY = touch.clientY - dragStartY;
@@ -138,13 +168,46 @@ function setupCanvasEvents() {
   }, { passive: true });
 
   canvas.addEventListener('touchend', e => {
+    // 長押しタイマーをキャンセル
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }
+
     if (!dragMoved && e.changedTouches.length === 1) {
       const touch = e.changedTouches[0];
       const rect = canvas.getBoundingClientRect();
       const x = (touch.clientX - rect.left - offsetX - canvas.width/2) / scale;
       const y = (touch.clientY - rect.top - offsetY - canvas.height/2) / scale;
       const node = findNodeAtPosition(data, x, y);
-      if (node) { selectNode(node.id); }
+
+      if (node) {
+        const now = Date.now();
+        // ダブルタップ検出
+        if (lastTapNode && lastTapNode.id === node.id && (now - lastTapTime) < DOUBLE_TAP_DELAY) {
+          // ダブルタップで編集開始
+          selectNode(node.id);
+          showInlineEditor();
+          lastTapNode = null;
+          lastTapTime = 0;
+        } else {
+          // シングルタップ
+          selectNode(node.id);
+          lastTapNode = node;
+          lastTapTime = now;
+        }
+      } else {
+        lastTapNode = null;
+        lastTapTime = 0;
+      }
+    }
+    isDragging = false;
+  });
+
+  canvas.addEventListener('touchcancel', () => {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
     }
     isDragging = false;
   });
@@ -303,7 +366,18 @@ function selectNode(id) {
     document.querySelectorAll('.color-option').forEach(el => el.classList.toggle('selected', el.dataset.color === node.color));
     document.getElementById('node-editor').classList.add('active');
   }
+  updateMobileActionBar();
   render();
+}
+
+// モバイルアクションバーの状態を更新
+function updateMobileActionBar() {
+  const isRoot = selectedId === data.id;
+  const siblingBtn = document.getElementById('action-add-sibling');
+  const deleteBtn = document.getElementById('action-delete');
+
+  if (siblingBtn) siblingBtn.disabled = isRoot;
+  if (deleteBtn) deleteBtn.disabled = isRoot;
 }
 
 function updateNodeLabel(value) {

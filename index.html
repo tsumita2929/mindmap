@@ -59,6 +59,26 @@
         <div class="mode-icon"></div>
         <span id="mode-text">編集中</span>
       </div>
+
+      <!-- モバイル用フローティングアクションバー -->
+      <div id="mobile-action-bar">
+        <button class="action-btn" id="action-add-child" onclick="addChild()">
+          <span class="action-icon">＋</span>
+          <span class="action-label">子追加</span>
+        </button>
+        <button class="action-btn" id="action-add-sibling" onclick="addSibling()">
+          <span class="action-icon">↳</span>
+          <span class="action-label">兄弟追加</span>
+        </button>
+        <button class="action-btn" id="action-edit" onclick="showInlineEditor()">
+          <span class="action-icon">✎</span>
+          <span class="action-label">編集</span>
+        </button>
+        <button class="action-btn action-danger" id="action-delete" onclick="deleteNode()">
+          <span class="action-icon">✕</span>
+          <span class="action-label">削除</span>
+        </button>
+      </div>
     </div>
   </div>
   <input type="file" id="file-input" accept=".json" style="display:none" onchange="handleFileImport(event)">
