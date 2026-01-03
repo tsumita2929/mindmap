@@ -9,6 +9,7 @@
 </head>
 <body>
   <div id="app">
+    <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
     <div id="sidebar">
       <div id="sidebar-header">
         <button class="btn-primary" onclick="addChild()">+ 子追加</button>
@@ -20,6 +21,11 @@
       <div id="tree-container"></div>
     </div>
     <div id="canvas-container">
+      <button id="mobile-menu-btn" onclick="toggleSidebar()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <canvas id="canvas"></canvas>
       <div id="node-editor">
         <label>ノード名</label>

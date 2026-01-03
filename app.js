@@ -111,6 +111,44 @@ function setupCanvasEvents() {
   });
   canvas.addEventListener('mouseup', () => isDragging = false);
   canvas.addEventListener('mouseleave', () => isDragging = false);
+
+  // タッチイベント対応
+  canvas.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      isDragging = true;
+      dragMoved = false;
+      const touch = e.touches[0];
+      dragStartX = touch.clientX - offsetX;
+      dragStartY = touch.clientY - offsetY;
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchmove', e => {
+    if (isDragging && e.touches.length === 1) {
+      const touch = e.touches[0];
+      const dx = touch.clientX - offsetX - dragStartX;
+      const dy = touch.clientY - offsetY - dragStartY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        dragMoved = true;
+      }
+      offsetX = touch.clientX - dragStartX;
+      offsetY = touch.clientY - dragStartY;
+      render();
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchend', e => {
+    if (!dragMoved && e.changedTouches.length === 1) {
+      const touch = e.changedTouches[0];
+      const rect = canvas.getBoundingClientRect();
+      const x = (touch.clientX - rect.left - offsetX - canvas.width/2) / scale;
+      const y = (touch.clientY - rect.top - offsetY - canvas.height/2) / scale;
+      const node = findNodeAtPosition(data, x, y);
+      if (node) { selectNode(node.id); }
+    }
+    isDragging = false;
+  });
+
   canvas.addEventListener('wheel', e => {
     e.preventDefault();
     const delta = e.deltaY > 0 ? 0.9 : 1.1;
@@ -394,6 +432,17 @@ function getMaxId(node) {
 function zoomIn() { scale = Math.min(3, scale * 1.2); render(); }
 function zoomOut() { scale = Math.max(0.3, scale / 1.2); render(); }
 function resetView() { scale = 1; offsetX = 0; offsetY = 0; render(); }
+
+// モバイルサイドバートグル
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const menuBtn = document.getElementById('mobile-menu-btn');
+
+  sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+  menuBtn.classList.toggle('active');
+}
 
 function showContextMenu(x, y, node) {
   const menu = document.getElementById('context-menu');
